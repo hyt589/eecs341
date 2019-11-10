@@ -13,7 +13,7 @@ public class CustomerAccountService {
     @Autowired
     private CustomerAccountMapper mapper;
 
-    public List<CustomerAccount> getByEmail(String email) {
+    public CustomerAccount getByEmail(String email) {
         return mapper.selectByEmail(email);
     }
 }
