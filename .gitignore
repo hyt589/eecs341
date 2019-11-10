@@ -1,0 +1,4 @@
+backend/*
+!backend/src
+!backend/pom.xml
+frontend/node_modules
