@@ -17,6 +17,6 @@ public interface CustomerAccountMapper {
             @Result(property = "billingAddress", column = "billing_address")
 
     })
-    public CustomerAccount selectByEmail(@Param("email") String email);
+    CustomerAccount selectByEmail(@Param("email") String email);
 
 }
