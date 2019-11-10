@@ -7,6 +7,7 @@ A course project for EECS341 (Intro to Database System) at CWRU
   - Java 8
     - SpringBoot
     - MyBatis
+  - Maven
 - Frontend:
   - node.js
     - React.js
