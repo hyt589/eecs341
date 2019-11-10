@@ -1,4 +1,6 @@
+/*
 backend/*
 !backend/src
 !backend/pom.xml
+!frontend
 frontend/node_modules
