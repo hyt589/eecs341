@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://159.89.190.142:3306/eecs341?useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: project
+    password: project
