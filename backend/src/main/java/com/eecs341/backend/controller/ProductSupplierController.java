@@ -20,4 +20,8 @@ public class ProductSupplierController {
         return R.data(service.getAddressByName(name));
     }
 
+    @GetMapping("/listAllNames")
+    public R getAllNames() {
+        return R.data(service.getAllNames());
+    }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductSupplierService {
@@ -14,5 +16,9 @@ public class ProductSupplierService {
 
     public HashMap getAddressByName(String name) {
         return mapper.getAddressOfSupplierByName(name);
+    }
+
+    public List<Map> getAllNames() {
+        return mapper.getAllSupplierNames();
     }
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Component
@@ -16,5 +18,9 @@ public interface ProductSupplierMapper {
             "where name = #{name}\n" +
             "limit 1;")
     HashMap getAddressOfSupplierByName(@Param("name") String name);
+
+    @Select("select distinct name\n" +
+            "from eecs341.product_supplier;")
+    List<Map> getAllSupplierNames();
 
 }
