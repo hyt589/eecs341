@@ -4,7 +4,6 @@ import com.eecs341.backend.mapper.ProductSupplierMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class ProductSupplierService {
     @Autowired
     ProductSupplierMapper mapper;
 
-    public HashMap getAddressByName(String name) {
+    public List<Map> getAddressByName(String name) {
         return mapper.getAddressOfSupplierByName(name);
     }
 
