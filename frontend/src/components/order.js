@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../api/config";
+import api from "../utils/config";
 
 class OrderPage extends React.Component {
   constructor(props) {
@@ -25,9 +25,7 @@ class OrderPage extends React.Component {
         >
           query 1
         </button>
-        <div className="row">
-          <div className="col-xs-4">{this.state.queryResult}</div>
-        </div>
+        <div className="row">{this.state.queryResult}</div>
       </div>
     );
   }
@@ -60,7 +58,7 @@ class OrderPage extends React.Component {
               this.setState({
                 queryResult: (
                   <table className="table">
-                    <thead>
+                    <thead className="thead-dark">
                       <tr>
                         <th scope="col">id</th>
                       </tr>
