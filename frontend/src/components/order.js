@@ -1,6 +1,13 @@
 import React from "react";
+import api from "../api/config";
 
 class OrderPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { queryResult: null };
+    this.fetchOrdersByEmail = this.fetchOrdersByEmail.bind(this);
+  }
+
   render() {
     return (
       <div>
@@ -12,8 +19,61 @@ class OrderPage extends React.Component {
             </p>
           </div>
         </div>
+        <button
+          className="btn btn-primary pull-left"
+          onClick={this.fetchOrdersByEmail}
+        >
+          query 1
+        </button>
+        <div className="row">
+          <div className="col-xs-4">{this.state.queryResult}</div>
+        </div>
       </div>
     );
+  }
+
+  fetchOrdersByEmail() {
+    const prefix = "/order";
+    const url = new URL(`${api}${prefix}/id-byEmailExceptReturned`);
+    const params = { email: "yxh589@case.edu" };
+    Object.keys(params).forEach(key =>
+      url.searchParams.append(key, params[key])
+    );
+    fetch(url)
+      .then(response => {
+        response
+          .json()
+          .then(result => {
+            if (result.code === 200) {
+              const data = result.data;
+              const tableRows = data.map(obj => {
+                console.log(obj);
+                return (
+                  <tr>
+                    {Object.keys(obj).map(key => (
+                      <th>{obj[key]}</th>
+                    ))}
+                  </tr>
+                );
+              });
+
+              this.setState({
+                queryResult: (
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">id</th>
+                      </tr>
+                    </thead>
+                    <tbody>{tableRows}</tbody>
+                  </table>
+                )
+              });
+            }
+          })
+          .catch();
+      })
+      .catch();
   }
 }
 
