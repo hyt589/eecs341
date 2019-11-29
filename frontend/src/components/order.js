@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../utils/config";
+import { errorAlert } from "../utils/common";
 
 class OrderPage extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class OrderPage extends React.Component {
         >
           query 1
         </button>
-        <div className="row">{this.state.queryResult}</div>
+        {this.state.queryResult}
       </div>
     );
   }
@@ -33,7 +34,7 @@ class OrderPage extends React.Component {
   fetchOrdersByEmail() {
     const prefix = "/order";
     const url = new URL(`${api}${prefix}/id-byEmailExceptReturned`);
-    const params = { email: "yxh589@case.edu" };
+    const params = { email: "abc" };
     Object.keys(params).forEach(key =>
       url.searchParams.append(key, params[key])
     );
@@ -67,6 +68,8 @@ class OrderPage extends React.Component {
                   </table>
                 )
               });
+            }else{
+              this.setState({queryResult: errorAlert})
             }
           })
           .catch();
