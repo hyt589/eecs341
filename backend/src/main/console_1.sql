@@ -7,12 +7,3 @@ create table if not exists Customer_Account{
     billing_address varchar(40)
     foreign key(orderID) references Order(id)
 };
-
-create table if not exists product{
-    id varchar(9)
-    primary key (id)
-    name varchar(40)
-    price float,
-    qty_in_stock int
-    };
-
