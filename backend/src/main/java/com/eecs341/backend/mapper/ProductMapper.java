@@ -18,7 +18,7 @@ public interface ProductMapper {
             "     eecs341.sup_by sb\n" +
             "where p.id = sb.product_id\n" +
             "    and sb.supplier_id = s.id\n" +
-            "    and category = 'tea'")
+            "    and category = #{category}")
     List<Map> getQtyInStockByCategory(@Param("category") String category);
 
     @Select("select p.name, p.qty_in_stock\n" +
