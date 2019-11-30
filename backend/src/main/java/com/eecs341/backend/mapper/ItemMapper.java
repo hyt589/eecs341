@@ -13,10 +13,9 @@ import java.util.Map;
 //getStatusExceptIfDamaged
 public interface ItemMapper {
     @Select("select i.status from eecs341.items i\n" +
-            "except where status = 'damaged'\n")
+            "except where status = #{status}\n")
     List<Map>getStatusExceptIfDamaged(@Param("status") String status);
-}
-public interface getFacilitiesofallItemsWithStatusOfDamaged{
+
     @Select("select f.detailed_address,\n" +
             "    f.city,\n" +
             "    f.state,\n" +
@@ -28,7 +27,7 @@ public interface getFacilitiesofallItemsWithStatusOfDamaged{
             "    and i.id = iff.item_id\n" +
             "    and i.status = \"damaged\"\n")
     List<Map>getFacilitiesofallItemsWithStatusOfDamaged(@Param("detailed_address")String detailed_address,
-                                                                @Param("city") String city,
-                                                                @Param("state") String state,
-                                                                @Param("zip_code") Integer zip_code)
+                                                        @Param("city") String city,
+                                                        @Param("state") String state,
+                                                        @Param("zip_code") Integer zip_code);
 }
