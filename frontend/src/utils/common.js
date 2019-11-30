@@ -1,4 +1,5 @@
 import React from "react";
+import api from "./config";
 
 const enhancedFetch = (url, options, callback) => {
   fetch(url, options)
@@ -13,13 +14,35 @@ const enhancedFetch = (url, options, callback) => {
     .catch();
 };
 
-const errorAlert = (
-  <div className="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error:</strong> an error happened
-    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-);
+const createURL = (prefix, endpoint, params) => {
+  let url = new URL(`${api}${prefix}${endpoint}`);
+  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+  return url;
+};
 
-export { enhancedFetch, errorAlert };
+const createTable = (data) => {
+  const tableRows = data.map((obj,i) => {
+    return (
+      <tr key={i+1}>
+        {Object.keys(obj).map((key, i) => (
+          <th key={i}>{obj[key]}</th>
+        ))}
+      </tr>
+    );
+  });
+  let table = (
+    <table className="table" key={0}>
+      <thead className="thead-dark" key={-1}>
+        <tr key={-2}>
+          {Object.keys(data[0]).map((key, i) => (
+            <th scope="col" key={i+1}>{key}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>{tableRows}</tbody>
+    </table>
+  );
+  return table
+};
+
+export { enhancedFetch, createURL, createTable };

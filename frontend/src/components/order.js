@@ -1,12 +1,17 @@
 import React from "react";
 import api from "../utils/config";
-import { errorAlert } from "../utils/common";
+import ErrorMessage from "./ErrorMessage";
 
 class OrderPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { queryResult: null };
+    this.state = {
+      queryResult: null,
+      email: " "
+    };
     this.fetchOrdersByEmail = this.fetchOrdersByEmail.bind(this);
+    this.handleEmailInputChange = this.handleEmailInputChange.bind(this);
+    this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
   }
 
   render() {
@@ -20,13 +25,33 @@ class OrderPage extends React.Component {
             </p>
           </div>
         </div>
-        <button
-          className="btn btn-primary pull-left"
-          onClick={this.fetchOrdersByEmail}
-        >
-          query 1
-        </button>
-        {this.state.queryResult}
+
+        <form onSubmit={this.handleEmailSubmit} className="border align-middle">
+          <div className="form-group row align-middle">
+            <div className="col-4 border border-light align-middle">
+              <p className="text-center align-middle">
+                Find order id by email except returned orders
+              </p>
+            </div>
+            <input
+              type="email"
+              className="form-control col-6"
+              placeholder="Enter Email"
+              value={this.state.email}
+              onChange={this.handleEmailInputChange}
+            ></input>
+            <div className="col-2">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div className="row">
+          <div className="col-3"></div>
+          <div className="col-6">{this.state.queryResult}</div>
+        </div>
       </div>
     );
   }
@@ -34,7 +59,7 @@ class OrderPage extends React.Component {
   fetchOrdersByEmail() {
     const prefix = "/order";
     const url = new URL(`${api}${prefix}/id-byEmailExceptReturned`);
-    const params = { email: "abc" };
+    const params = { email: this.state.email };
     Object.keys(params).forEach(key =>
       url.searchParams.append(key, params[key])
     );
@@ -68,13 +93,22 @@ class OrderPage extends React.Component {
                   </table>
                 )
               });
-            }else{
-              this.setState({queryResult: errorAlert})
+            } else {
+              this.setState({ queryResult: <ErrorMessage /> });
             }
           })
           .catch();
       })
       .catch();
+  }
+
+  handleEmailInputChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  handleEmailSubmit(event) {
+    event.preventDefault();
+    this.fetchOrdersByEmail();
   }
 }
 
