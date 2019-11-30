@@ -7,7 +7,7 @@ class ProductPage extends React.Component {
     super(props);
     this.state = {
       inputValues: {
-        category: ''
+        category: ""
       },
       queryResult: null
     };
@@ -24,24 +24,26 @@ class ProductPage extends React.Component {
           this.setState({ queryResult: <ErrorMessage /> });
         }
       }
-    }
-    this.paramObjs ={
-      getQtyByCategory:{
-        category: ''
+    };
+    this.paramObjs = {
+      getQtyByCategory: {
+        category: ""
       }
-    }
+    };
     this.prefix = "/product";
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
-    const target =  event.target
-    const {inputValues} = {...this.state}
-    const currentState = inputValues
-    inputValues[target.getAttribute('paramkey')] = target.value
-    this.setState({inputValues: currentState})
-    this.paramObjs[target.getAttribute('paramobjkey')][target.getAttribute('paramkey')] = target.value
+    const target = event.target;
+    const { inputValues } = { ...this.state };
+    const currentState = inputValues;
+    inputValues[target.getAttribute("paramkey")] = target.value;
+    this.setState({ inputValues: currentState });
+    this.paramObjs[target.getAttribute("paramobjkey")][
+      target.getAttribute("paramkey")
+    ] = target.value;
   }
 
   handleSubmit(event) {
@@ -49,7 +51,7 @@ class ProductPage extends React.Component {
     const endpoint = form.getAttribute("endpoint");
     let fn = this.functions[form.getAttribute("urlmethod")];
     const params = this.paramObjs[form.getAttribute("urlmethod")];
-    console.log(params)
+    console.log(params);
     const url = createURL(this.prefix, endpoint, params);
     enhancedFetch(url, {}, fn);
     event.preventDefault();
@@ -70,7 +72,7 @@ class ProductPage extends React.Component {
           endpoint="/qtyInStock-byCategory"
           urlmethod="getQtyByCategory"
         >
-          <div class="form-group row">
+          <div className="form-group row">
             <div className="col-2">Get qty in stock by product category</div>
             <label for="getQtyByCat-category" className="col-1">
               Product Category
@@ -79,7 +81,6 @@ class ProductPage extends React.Component {
               type="text"
               class="form-control col-6 h-100"
               id="getQtyByCat-category"
-              aria-describedby="emailHelp"
               placeholder="Enter category"
               value={this.state.inputValues.category}
               onChange={this.handleInputChange}

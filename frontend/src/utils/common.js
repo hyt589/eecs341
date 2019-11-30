@@ -31,7 +31,7 @@ const createTable = (data) => {
     );
   });
   let table = (
-    <table className="table" key={0}>
+    <table className="table table-striped" key={0}>
       <thead className="thead-dark" key={-1}>
         <tr key={-2}>
           {Object.keys(data[0]).map((key, i) => (

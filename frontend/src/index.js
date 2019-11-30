@@ -10,6 +10,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
+$(".nav .nav-link").on("click", function(){
+    $(".nav").find(".active").removeClass("active");
+    $(this).addClass("active");
+ });
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
