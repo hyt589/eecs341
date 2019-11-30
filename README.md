@@ -8,7 +8,8 @@ A course project for EECS341 (Intro to Database System) at CWRU
     - SpringBoot
     - MyBatis
   - Maven
+  - PostgreSQL
 - Frontend:
+  - Bootstrap
   - node.js
     - React.js
-    - Axios.js
