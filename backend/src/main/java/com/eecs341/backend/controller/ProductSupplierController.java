@@ -5,7 +5,6 @@ import com.eecs341.backend.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/productSupplier")
 public class ProductSupplierController {

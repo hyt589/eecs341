@@ -12,22 +12,17 @@ import java.util.Map;
 @Component
 //getStatusExceptIfDamaged
 public interface ItemMapper {
-    @Select("select i.status from eecs341.items i\n" +
-            "except where status = #{status}\n")
-    List<Map>getStatusExceptIfDamaged(@Param("status") String status);
 
     @Select("select f.detailed_address,\n" +
-            "    f.city,\n" +
-            "    f.state,\n" +
-            "    f.zip_code\n" +
-            "from eecs341.facilty as f,\n" +
-            "    eecs341.item_fac as iff,\n" +
-            "    eecs341.item as i\n" +
-            "where f.id = iff.facilty_id,\n" +
-            "    and i.id = iff.item_id\n" +
-            "    and i.status = \"damaged\"\n")
-    List<Map>getFacilitiesofallItemsWithStatusOfDamaged(@Param("detailed_address")String detailed_address,
-                                                        @Param("city") String city,
-                                                        @Param("state") String state,
-                                                        @Param("zip_code") Integer zip_code);
+            "       f.city,\n" +
+            "       f.state,\n" +
+            "       f.zip_code\n" +
+            "from facility as f,\n" +
+            "     item_fac as iff,\n" +
+            "     item as i\n" +
+            "where f.id = iff.facility_id\n" +
+            "  and i.id = iff.item_id\n" +
+            "  and i.status = #{status}")
+    List<Map> selectAllFacilitiesContainingItemOfStatus(@Param("status") String status);
+
 }
