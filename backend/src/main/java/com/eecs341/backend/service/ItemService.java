@@ -12,14 +12,7 @@ public class ItemService {
      @Autowired
      ItemMapper mapper;
 
-    public List<Map> getStatusExceptIfDamaged(String status){
-        return mapper.getStatusExceptIfDamaged(status);
-    }
-
-    public List<Map> getFacilitiesofallItemsWithStatusOfDamaged(String detailed_address,
-                                                                String city,
-                                                                String state,
-                                                                Integer zip_code) {
-        return mapper.getFacilitiesofallItemsWithStatusOfDamaged(detailed_address,city,state,zip_code);
-    }
+     public List<Map> facilitiesContainingItemsOfStatus(String status) {
+          return mapper.selectAllFacilitiesContainingItemOfStatus(status);
+     }
 }
