@@ -45,4 +45,5 @@ const createTable = (data) => {
   return table
 };
 
+
 export { enhancedFetch, createURL, createTable };
