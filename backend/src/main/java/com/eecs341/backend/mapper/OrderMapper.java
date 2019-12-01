@@ -12,13 +12,14 @@ import java.util.Map;
 @Component
 public interface OrderMapper {
 
-    @Select("select o.id from eecs341.orders o, eecs341.cust_ord co, eecs341.customer_account ca\n" +
+    @Select("select o.id, o.qty, o.status, p.name " +
+            "from eecs341.orders o, eecs341.cust_ord co, eecs341.customer_account ca, eecs341.item_ord io, eecs341.prod_item pi, eecs341.product p\n" +
             "where o.id = co.order_id\n" +
             "and co.customer_id = ca.id\n" +
-            "and ca.email_address = #{email}\n" +
-            "except\n" +
-            "select id from eecs341.orders\n" +
-            "where status='returned'")
+            "and ca.email_address = #{email} " +
+            "and io.order_id = o.id " +
+            "and io.item_id = pi.item_id " +
+            "and p.id = pi.product_id\n")
     List<Map> getOrderIdByEmailAddressExceptReturned(@Param("email") String email);
 
 }

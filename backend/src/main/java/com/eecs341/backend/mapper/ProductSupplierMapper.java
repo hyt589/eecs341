@@ -12,7 +12,7 @@ import java.util.Map;
 @Component
 public interface ProductSupplierMapper {
 
-    @Select("select address\n" +
+    @Select("select address, city, state, zip_code\n" +
             "from eecs341.product_supplier\n" +
             "where name = #{name}\n" +
             "limit 1;")

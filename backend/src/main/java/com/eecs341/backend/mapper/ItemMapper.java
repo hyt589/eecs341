@@ -17,9 +17,9 @@ public interface ItemMapper {
             "       f.city,\n" +
             "       f.state,\n" +
             "       f.zip_code\n" +
-            "from facility as f,\n" +
-            "     item_fac as iff,\n" +
-            "     item as i\n" +
+            "from eecs341.facility as f,\n" +
+            "     eecs341.item_fac as iff,\n" +
+            "     eecs341.item as i\n" +
             "where f.id = iff.facility_id\n" +
             "  and i.id = iff.item_id\n" +
             "  and i.status = #{status}")

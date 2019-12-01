@@ -5,6 +5,9 @@ import com.eecs341.backend.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/productSupplier")
 public class ProductSupplierController {
@@ -14,11 +17,13 @@ public class ProductSupplierController {
 
     @GetMapping("/address-byName")
     public R getAddressByName(@RequestParam String name) {
-        return R.data(service.getAddressByName(name));
+        List<Map> data = service.getAddressByName(name);
+        return data.size() > 0 ? R.data(data) : R.error("Empty Result");
     }
 
     @GetMapping("/listAllNames")
     public R getAllNames() {
-        return R.data(service.getAllNames());
+        List<Map> data = service.getAllNames();
+        return data.size() > 0 ? R.data(data) : R.error("Empty Result");
     }
 }
