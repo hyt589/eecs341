@@ -71,6 +71,7 @@ class ProductPage extends React.Component {
           onSubmit={this.handleSubmit}
           endpoint="/qtyInStock-byCategory"
           urlmethod="getQtyByCategory"
+          method='get'
         >
           <div className="form-group row">
             <div className="col-2">Get qty in stock by product category</div>

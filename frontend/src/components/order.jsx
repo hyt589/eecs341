@@ -48,6 +48,7 @@ class OrderPage extends QueryPageComponent {
           className="border align-middle"
           endpoint="/id-byEmailExceptReturned"
           urlmethod="getOrderByEmail"
+          method="get"
         >
           <div className="form-group row align-middle">
             <div className="col-4 border border-light align-middle">
