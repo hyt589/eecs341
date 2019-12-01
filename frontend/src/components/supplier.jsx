@@ -12,7 +12,7 @@ class SupplierPage extends QueryPageComponent {
     this.state.queryResult = null;
     this.functions = {
       getAddressByName: result => {
-        if (result.data.length !== 0) {
+        if (result.code === 200) {
           const table = createTable(result.data);
           this.setState({
             queryResult: table

@@ -1,17 +1,39 @@
 import React from "react";
 import api from "../utils/config";
 import ErrorMessage from "./ErrorMessage";
+import { enhancedFetch, createTable } from "../utils/common";
+import QueryPageComponent from "./QueryPageComponet";
 
-class OrderPage extends React.Component {
+class OrderPage extends QueryPageComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      queryResult: null,
-      email: " "
-    };
-    this.fetchOrdersByEmail = this.fetchOrdersByEmail.bind(this);
-    this.handleEmailInputChange = this.handleEmailInputChange.bind(this);
-    this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
+    this.state.inputValues = {}
+    this.state.queryResult = null
+    this.functions = {
+      getOrderByEmail: result => {
+        if (result.code === 200) {
+          const table = createTable(result.data)
+          this.setState({
+            queryResult: table
+          })
+        }else{
+          this.setState({
+            queryResult: <ErrorMessage/>
+          })
+        }
+      }
+    }
+    this.paramObjs = {
+      getOrderByEmail: {
+        email: ""
+      }
+    }
+
+    this.prefix="/order"
+
+    
+
+    
   }
 
   render() {
@@ -26,7 +48,7 @@ class OrderPage extends React.Component {
           </div>
         </div>
 
-        <form onSubmit={this.handleEmailSubmit} className="border align-middle">
+        <form onSubmit={this.handleGetSubmit} className="border align-middle" endpoint="/id-byEmailExceptReturned" urlmethod="getOrderByEmail">
           <div className="form-group row align-middle">
             <div className="col-4 border border-light align-middle">
               <p className="text-center align-middle">
@@ -38,7 +60,9 @@ class OrderPage extends React.Component {
               className="form-control col-6"
               placeholder="Enter Email"
               value={this.state.email}
-              onChange={this.handleEmailInputChange}
+              onChange={this.handleInputChange}
+              paramkey="email"
+              paramobjkey="getOrderByEmail"
             ></input>
             <div className="col-2">
               <button type="submit" className="btn btn-primary">
@@ -56,60 +80,7 @@ class OrderPage extends React.Component {
     );
   }
 
-  fetchOrdersByEmail() {
-    const prefix = "/order";
-    const url = new URL(`${api}${prefix}/id-byEmailExceptReturned`);
-    const params = { email: this.state.email };
-    Object.keys(params).forEach(key =>
-      url.searchParams.append(key, params[key])
-    );
-    fetch(url)
-      .then(response => {
-        response
-          .json()
-          .then(result => {
-            if (result.code === 200) {
-              const data = result.data;
-              const tableRows = data.map(obj => {
-                console.log(obj);
-                return (
-                  <tr>
-                    {Object.keys(obj).map(key => (
-                      <th>{obj[key]}</th>
-                    ))}
-                  </tr>
-                );
-              });
-
-              this.setState({
-                queryResult: (
-                  <table className="table">
-                    <thead className="thead-dark">
-                      <tr>
-                        <th scope="col">id</th>
-                      </tr>
-                    </thead>
-                    <tbody>{tableRows}</tbody>
-                  </table>
-                )
-              });
-            } else {
-              this.setState({ queryResult: <ErrorMessage /> });
-            }
-          })
-          .catch();
-      })
-      .catch();
-  }
-
-  handleEmailInputChange(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  handleEmailSubmit(event) {
-    event.preventDefault();
-    this.fetchOrdersByEmail();
-  }
+  
 }
 
 export default OrderPage;
