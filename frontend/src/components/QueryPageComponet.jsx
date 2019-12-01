@@ -33,7 +33,13 @@ class QueryPageComponent extends React.Component {
     const params = this.paramObjs[form.getAttribute("urlmethod")]
     console.log(params)
     const url = createURL(this.prefix, endpoint, params)
-    enhancedFetch(url, {}, fn)
+    enhancedFetch(
+      url,
+      {
+        method: form.getAttribute("method")
+      },
+      fn
+    )
     event.preventDefault()
   }
 }

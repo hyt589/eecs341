@@ -1,5 +1,6 @@
 import React from "react";
 import api from "./config";
+import ErrorMessage from "../components/ErrorMessage";
 
 const enhancedFetch = (url, options, callback) => {
   fetch(url, options)
@@ -16,7 +17,10 @@ const enhancedFetch = (url, options, callback) => {
 
 const createURL = (prefix, endpoint, params) => {
   let url = new URL(`${api}${prefix}${endpoint}`);
-  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+  console.log(params)
+  if (params !== undefined && params !== null && Object.keys(params) !== 0) {
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+  }
   return url;
 };
 
@@ -44,6 +48,8 @@ const createTable = (data) => {
   );
   return table
 };
+
+
 
 
 export { enhancedFetch, createURL, createTable };

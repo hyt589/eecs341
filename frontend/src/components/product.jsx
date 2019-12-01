@@ -74,12 +74,12 @@ class ProductPage extends React.Component {
         >
           <div className="form-group row">
             <div className="col-2">Get qty in stock by product category</div>
-            <label for="getQtyByCat-category" className="col-1">
+            <label htmlFor="getQtyByCat-category" className="col-1">
               Product Category
             </label>
             <input
               type="text"
-              class="form-control col-6 h-100"
+              className="form-control col-6 h-100"
               id="getQtyByCat-category"
               placeholder="Enter category"
               value={this.state.inputValues.category}

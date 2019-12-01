@@ -2,25 +2,28 @@ import QueryPageComponent from "./QueryPageComponet"
 import React from "react"
 import { createTable } from "../utils/common"
 import ErrorMessage from "./ErrorMessage"
+import QueryForm from "./QueryForm"
 
 class SupplierPage extends QueryPageComponent {
   constructor(props) {
     super(props)
     this.state.inputValues = {}
     this.state.queryResult = null
-    this.functions = {
-      getAddressByName: result => {
-        if (result.code === 200) {
-          const table = createTable(result.data)
-          this.setState({
-            queryResult: table
-          })
-        } else {
-          this.setState({
-            queryResult: <ErrorMessage />
-          })
-        }
+    this.displayResult = result => {
+      if (result.code === 200) {
+        const table = createTable(result.data)
+        this.setState({
+          queryResult: table
+        })
+      } else {
+        this.setState({
+          queryResult: <ErrorMessage />
+        })
       }
+    }
+    this.functions = {
+      getAddressByName: this.displayResult,
+      listAllNames: this.displayResult
     }
     this.paramObjs = {
       getAddressByName: {
@@ -40,10 +43,11 @@ class SupplierPage extends QueryPageComponent {
           </div>
         </div>
         <form
-          className="border"
+          className="border container"
           endpoint="/address-byName"
           urlmethod="getAddressByName"
           onSubmit={this.handleGetSubmit}
+          method="get"
         >
           <div className="form-group row">
             <div className="col-2">Get supplier address by name</div>
@@ -65,9 +69,21 @@ class SupplierPage extends QueryPageComponent {
             </button>
           </div>
         </form>
-        <div className="row border">
+        <QueryForm
+          endpoint="/listAllNames"
+          urlmethod="listAllNames"
+          onSubmit={this.handleGetSubmit}
+          method="get"
+          content={
+            <div>
+              <div className="col-6"> </div>
+              <div className="col-2 align-middle"> Get supplier name list </div>
+            </div>
+          }
+        />
+        <div className="row">
           <div className="col-3"></div>
-          <div className="col-6">{this.state.queryResult}</div>
+          <div className="col-6 border">{this.state.queryResult}</div>
         </div>
       </div>
     )
