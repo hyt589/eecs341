@@ -1,37 +1,34 @@
-import QueryPageComponent from "./QueryPageComponet";
-import React from "react";
-import { createTable } from "../utils/common";
-import ErrorMessage from "./ErrorMessage";
+import QueryPageComponent from "./QueryPageComponet"
+import React from "react"
+import { createTable } from "../utils/common"
+import ErrorMessage from "./ErrorMessage"
 
 class SupplierPage extends QueryPageComponent {
   constructor(props) {
-    super(props);
-    this.state.inputValues = {
-      
-    };
-    this.state.queryResult = null;
+    super(props)
+    this.state.inputValues = {}
+    this.state.queryResult = null
     this.functions = {
       getAddressByName: result => {
         if (result.code === 200) {
-          const table = createTable(result.data);
+          const table = createTable(result.data)
           this.setState({
             queryResult: table
-          });
+          })
         } else {
-            this.setState({
-                queryResult: <ErrorMessage/>
-            })
+          this.setState({
+            queryResult: <ErrorMessage />
+          })
         }
       }
-    };
+    }
     this.paramObjs = {
       getAddressByName: {
         name: ""
       }
-    };
-    this.prefix = "/productSupplier";
+    }
+    this.prefix = "/productSupplier"
   }
-
 
   render() {
     return (
@@ -73,8 +70,8 @@ class SupplierPage extends QueryPageComponent {
           <div className="col-6">{this.state.queryResult}</div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default SupplierPage;
+export default SupplierPage

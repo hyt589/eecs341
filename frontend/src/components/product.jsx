@@ -1,60 +1,60 @@
-import React from "react";
-import { enhancedFetch, createURL, createTable } from "../utils/common";
-import ErrorMessage from "./ErrorMessage";
+import React from "react"
+import { enhancedFetch, createURL, createTable } from "../utils/common"
+import ErrorMessage from "./ErrorMessage"
 
 class ProductPage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       inputValues: {
         category: ""
       },
       queryResult: null
-    };
+    }
     this.functions = {
       getQtyByCategory: result => {
         if (result.code === 200) {
-          const data = result.data;
-          console.log(data);
-          const table = createTable(data);
+          const data = result.data
+          console.log(data)
+          const table = createTable(data)
           this.setState({
             queryResult: table
-          });
+          })
         } else {
-          this.setState({ queryResult: <ErrorMessage /> });
+          this.setState({ queryResult: <ErrorMessage /> })
         }
       }
-    };
+    }
     this.paramObjs = {
       getQtyByCategory: {
         category: ""
       }
-    };
-    this.prefix = "/product";
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    this.prefix = "/product"
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const { inputValues } = { ...this.state };
-    const currentState = inputValues;
-    inputValues[target.getAttribute("paramkey")] = target.value;
-    this.setState({ inputValues: currentState });
+    const target = event.target
+    const { inputValues } = { ...this.state }
+    const currentState = inputValues
+    inputValues[target.getAttribute("paramkey")] = target.value
+    this.setState({ inputValues: currentState })
     this.paramObjs[target.getAttribute("paramobjkey")][
       target.getAttribute("paramkey")
-    ] = target.value;
+    ] = target.value
   }
 
   handleSubmit(event) {
-    const form = event.target;
-    const endpoint = form.getAttribute("endpoint");
-    let fn = this.functions[form.getAttribute("urlmethod")];
-    const params = this.paramObjs[form.getAttribute("urlmethod")];
-    console.log(params);
-    const url = createURL(this.prefix, endpoint, params);
-    enhancedFetch(url, {}, fn);
-    event.preventDefault();
+    const form = event.target
+    const endpoint = form.getAttribute("endpoint")
+    let fn = this.functions[form.getAttribute("urlmethod")]
+    const params = this.paramObjs[form.getAttribute("urlmethod")]
+    console.log(params)
+    const url = createURL(this.prefix, endpoint, params)
+    enhancedFetch(url, {}, fn)
+    event.preventDefault()
   }
 
   render() {
@@ -97,8 +97,8 @@ class ProductPage extends React.Component {
           <div className="col-6 border">{this.state.queryResult}</div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default ProductPage;
+export default ProductPage

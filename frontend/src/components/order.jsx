@@ -1,12 +1,11 @@
-import React from "react";
-import api from "../utils/config";
-import ErrorMessage from "./ErrorMessage";
-import { enhancedFetch, createTable } from "../utils/common";
-import QueryPageComponent from "./QueryPageComponet";
+import React from "react"
+import ErrorMessage from "./ErrorMessage"
+import { createTable } from "../utils/common"
+import QueryPageComponent from "./QueryPageComponet"
 
 class OrderPage extends QueryPageComponent {
   constructor(props) {
-    super(props);
+    super(props)
     this.state.inputValues = {}
     this.state.queryResult = null
     this.functions = {
@@ -16,9 +15,9 @@ class OrderPage extends QueryPageComponent {
           this.setState({
             queryResult: table
           })
-        }else{
+        } else {
           this.setState({
-            queryResult: <ErrorMessage/>
+            queryResult: <ErrorMessage />
           })
         }
       }
@@ -29,11 +28,7 @@ class OrderPage extends QueryPageComponent {
       }
     }
 
-    this.prefix="/order"
-
-    
-
-    
+    this.prefix = "/order"
   }
 
   render() {
@@ -48,7 +43,12 @@ class OrderPage extends QueryPageComponent {
           </div>
         </div>
 
-        <form onSubmit={this.handleGetSubmit} className="border align-middle" endpoint="/id-byEmailExceptReturned" urlmethod="getOrderByEmail">
+        <form
+          onSubmit={this.handleGetSubmit}
+          className="border align-middle"
+          endpoint="/id-byEmailExceptReturned"
+          urlmethod="getOrderByEmail"
+        >
           <div className="form-group row align-middle">
             <div className="col-4 border border-light align-middle">
               <p className="text-center align-middle">
@@ -77,10 +77,8 @@ class OrderPage extends QueryPageComponent {
           <div className="col-6">{this.state.queryResult}</div>
         </div>
       </div>
-    );
+    )
   }
-
-  
 }
 
-export default OrderPage;
+export default OrderPage

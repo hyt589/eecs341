@@ -1,15 +1,15 @@
-import React from "react";
-import CodeBlock from "./CodeBlock";
+import React from "react"
+import CodeBlock from "./CodeBlock"
 
-const ReactMarkdown = require("react-markdown");
+const ReactMarkdown = require("react-markdown")
 
 class WelcomePage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       sql: "",
       text: ""
-    };
+    }
   }
 
   componentDidMount() {
@@ -20,15 +20,15 @@ class WelcomePage extends React.Component {
 
         this.setState({
           sql: text
-        });
-      });
+        })
+      })
     fetch("/data/README.md")
       .then(r => r.text())
       .then(text => {
         this.setState({
           text: text
         })
-      });
+      })
   }
 
   render() {
@@ -94,8 +94,8 @@ class WelcomePage extends React.Component {
           </a>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default WelcomePage;
+export default WelcomePage
