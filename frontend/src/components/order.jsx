@@ -102,7 +102,7 @@ class OrderPage extends QueryPageComponent {
             <div className="form-group row align-middle">
               <div className="col-4 border border-light align-middle">
                 <p className="text-center align-middle">
-                  Find order id by email except returned orders
+                  Find order by email except returned orders
                 </p>
               </div>
               <input
