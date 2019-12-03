@@ -69,7 +69,7 @@ class OrderPage extends QueryPageComponent {
           onChange={this.handleInputChange}
           dataKey="productId"
         />
-        <div className="form-control col-2">
+        <div className="form-group col-4">
           <label htmlFor="qty">Number</label>
           <input
             type="number"
@@ -122,7 +122,7 @@ class OrderPage extends QueryPageComponent {
             </div>
           </form>
 
-          <div className="row">
+          <div className>
             <QueryForm
               className="col-4"
               content={insertFormContent}

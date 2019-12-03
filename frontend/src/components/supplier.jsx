@@ -76,8 +76,8 @@ class SupplierPage extends QueryPageComponent {
           method="get"
           content={
             <div>
-              <div className="col-6"> </div>
-              <div className="col-2 align-middle"> Get supplier name list </div>
+              
+              <div className="align-middle"> <p>Get supplier name list</p> </div>
             </div>
           }
         />
