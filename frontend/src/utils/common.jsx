@@ -3,8 +3,6 @@ import api from "./config";
 import ErrorMessage from "../components/ErrorMessage";
 
 const enhancedFetch = (url, options, callback) => {
-  console.log(options);
-  
   fetch(url, options)
     .then(response => {
       response
@@ -19,7 +17,6 @@ const enhancedFetch = (url, options, callback) => {
 
 const createURL = (prefix, endpoint, params) => {
   let url = new URL(`${api}${prefix}${endpoint}`);
-  console.log(params)
   if (params !== undefined && params !== null && Object.keys(params) !== 0) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
   }
@@ -50,8 +47,6 @@ const createTable = (data) => {
   );
   return table
 };
-
-
 
 
 export { enhancedFetch, createURL, createTable };

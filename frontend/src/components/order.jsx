@@ -1,6 +1,12 @@
 import React from "react"
 import ErrorMessage from "./ErrorMessage"
-import { createTable, createURL, enhancedFetch } from "../utils/common"
+import {
+  createTable,
+  createURL,
+  enhancedFetch,
+  init,
+  initializeValues
+} from "../utils/common"
 import QueryPageComponent from "./QueryPageComponet"
 import QueryForm from "./QueryForm"
 import QueryInput from "./QueryInput"
@@ -16,6 +22,19 @@ class OrderPage extends QueryPageComponent {
     }
     this.state.inputValues = {}
     this.state.queryResult = null
+    this.insertOrderSubmit=(event)=>{
+      if (
+        this.state.inputValues.email !== undefined &&
+        this.state.inputValues.productId !== undefined &&
+        this.state.inputValues.orderQty !== undefined &&
+        this.state.inputValues.orderQty !== null
+      ) {
+        this.handleGetSubmit(event)
+      }else{
+        alert("Please fill out all fields")
+        event.preventDefault()
+      }
+    }
     this.functions = {
       getOrderByEmail: result => {
         if (result.code === 200) {
@@ -54,6 +73,17 @@ class OrderPage extends QueryPageComponent {
     const insertFormContent = (
       <div className="row">
         <Select
+          parent={this}
+          initialization={value => {
+            console.log(this)
+
+            const { inputValues } = { ...this.state }
+            const currentState = inputValues
+            currentState.email = value
+            this.setState({
+              inputValues: currentState
+            })
+          }}
           prefix="/customer"
           endpoint="/mailingList"
           name="Select Email"
@@ -62,6 +92,17 @@ class OrderPage extends QueryPageComponent {
           dataKey="email"
         />
         <Select
+          parent={this}
+          initialization={value => {
+            console.log(this)
+
+            const { inputValues } = { ...this.state }
+            const currentState = inputValues
+            currentState.productId = value
+            this.setState({
+              inputValues: currentState
+            })
+          }}
           prefix="/product"
           endpoint="/idNameSupplier"
           name="Select product"
@@ -128,7 +169,7 @@ class OrderPage extends QueryPageComponent {
               content={insertFormContent}
               method="post"
               jsonBody={JSON.stringify(this.newOrderBody)}
-              onSubmit={this.handleGetSubmit}
+              onSubmit={this.insertOrderSubmit}
               urlmethod="placeOrder"
               endpoint="/newOrder"
             />

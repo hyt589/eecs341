@@ -4,6 +4,8 @@ import { createURL, enhancedFetch } from "../utils/common"
 class Select extends React.Component {
   constructor(props) {
     super(props)
+    this.parent = props.parent
+    this.initialization=props.initialization
     this.prefix = props.prefix
     this.endpoint = props.endpoint
     this.name = props.name
@@ -45,6 +47,10 @@ class Select extends React.Component {
         this.setState({
           selector: selector
         })
+        if (this.initialization !== undefined) {
+          this.initialization.bind(this.parent)
+          this.initialization(document.getElementById(this.dataKey).value)
+        }
       }
     )
   }
