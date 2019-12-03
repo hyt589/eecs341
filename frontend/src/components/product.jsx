@@ -67,7 +67,7 @@ class ProductPage extends React.Component {
           </div>
         </div>
         <form
-          className="border"
+          className="border container"
           onSubmit={this.handleSubmit}
           endpoint="/qtyInStock-byCategory"
           urlmethod="getQtyByCategory"
