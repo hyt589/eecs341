@@ -1,8 +1,6 @@
 package com.eecs341.backend.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,5 +19,27 @@ public interface OrderMapper {
             "and io.item_id = pi.item_id " +
             "and p.id = pi.product_id\n")
     List<Map> getOrderIdByEmailAddressExceptReturned(@Param("email") String email);
+
+
+    @Select("insert into eecs341.orders(qty, status) \n" +
+            "values (#{qty}, 'pre-shipping') \n" +
+            "returning id")
+    int insertOrder(
+            @Param("qty") int qty
+    );
+
+    @Insert("insert into eecs341.prod_ord (product_id, order_id)\n" +
+            "values (#{productID},#{orderID})")
+    void insertProductOrder(
+            @Param("productID") int productID,
+            @Param("orderID") int orderID
+    );
+
+    @Insert("insert into eecs341.cust_ord (customer_id, order_id)\n" +
+            "values (#{customerID},#{orderID})")
+    void insertCustOrd(
+            @Param("customerID") int customerID,
+            @Param("orderID") int orderID
+    );
 
 }

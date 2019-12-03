@@ -19,11 +19,13 @@ class QueryPageComponent extends React.Component {
     const { inputValues } = { ...this.state }
     const currentState = inputValues
     inputValues[target.getAttribute("paramkey")] = target.value
-    console.log(inputValues)
+    console.log(this.state)
     this.setState({ inputValues: currentState })
-    this.paramObjs[target.getAttribute("paramobjkey")][
-      target.getAttribute("paramkey")
-    ] = target.value
+    if (this.paramObjs[target.getAttribute("paramobjkey")] !== undefined) {
+      this.paramObjs[target.getAttribute("paramobjkey")][
+        target.getAttribute("paramkey")
+      ] = target.value
+    }
   }
 
   handleGetSubmit(event) {
@@ -31,12 +33,18 @@ class QueryPageComponent extends React.Component {
     const endpoint = form.getAttribute("endpoint")
     let fn = this.functions[form.getAttribute("urlmethod")]
     const params = this.paramObjs[form.getAttribute("urlmethod")]
-    console.log(form.getAttribute("method"))
     const url = createURL(this.prefix, endpoint, params)
+    console.log(typeof form);
+    
     enhancedFetch(
       url,
       {
-        method: form.getAttribute("method")
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        method: form.getAttribute("method"),
+        body: form.getAttribute("jsonBody")
       },
       fn
     )

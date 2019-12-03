@@ -3,6 +3,8 @@ import api from "./config";
 import ErrorMessage from "../components/ErrorMessage";
 
 const enhancedFetch = (url, options, callback) => {
+  console.log(options);
+  
   fetch(url, options)
     .then(response => {
       response

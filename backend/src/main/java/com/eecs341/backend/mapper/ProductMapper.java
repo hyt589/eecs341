@@ -30,4 +30,8 @@ public interface ProductMapper {
             "    and s.name = #{supplier}\n" +
             "    and p.qty_in_stock < #{qty}")
     List<Map> getNamesOfProductBySupplierNameAndQtyInStock(@Param("supplier") String supplier, @Param("qty") int qty);
+
+    @Select("select p.id, p.name, ps.name as supplier from eecs341.product p, eecs341.sup_by sb, eecs341.product_supplier ps\n" +
+            "where p.id=sb.product_id and sb.supplier_id=ps.id")
+    List<Map> getIdNameSupplierList();
 }

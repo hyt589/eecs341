@@ -27,4 +27,9 @@ public class ProductController {
         List<Map> data = service.getNamesOfProductsBySupplierNameAndQtyInStock(supplier, qty);
         return data.size() > 0 ? R.data(data) : R.error("Empty results");
     }
+
+    @GetMapping("/idNameSupplier")
+    public R getIdNameSupplier() {
+        return R.data(service.getIdNameSupplierList());
+    }
 }

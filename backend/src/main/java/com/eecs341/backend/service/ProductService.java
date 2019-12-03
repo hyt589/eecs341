@@ -20,4 +20,8 @@ public class ProductService {
     public List<Map> getNamesOfProductsBySupplierNameAndQtyInStock(String supplier, int qty) {
         return mapper.getNamesOfProductBySupplierNameAndQtyInStock(supplier, qty);
     }
+
+    public List<Map> getIdNameSupplierList() {
+        return mapper.getIdNameSupplierList();
+    }
 }
