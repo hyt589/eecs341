@@ -44,7 +44,7 @@ class OrderPage extends QueryPageComponent {
           })
         } else {
           this.setState({
-            queryResult: <ErrorMessage />
+            queryResult: <ErrorMessage msg={result.msg} />
           })
         }
       },
@@ -71,8 +71,10 @@ class OrderPage extends QueryPageComponent {
 
   render() {
     const insertFormContent = (
-      <div className="row">
+      <div className="row d-flex">
+        <div className="col-3 align-self-center">Insert new Order record</div>
         <Select
+        className="col-3"
           parent={this}
           initialization={value => {
             console.log(this)
@@ -92,6 +94,7 @@ class OrderPage extends QueryPageComponent {
           dataKey="email"
         />
         <Select
+        className="col-3"
           parent={this}
           initialization={value => {
             console.log(this)
@@ -110,7 +113,7 @@ class OrderPage extends QueryPageComponent {
           onChange={this.handleInputChange}
           dataKey="productId"
         />
-        <div className="form-group col-4">
+        <div className="form-group col-3">
           <label htmlFor="qty">Number</label>
           <input
             type="number"
@@ -140,15 +143,15 @@ class OrderPage extends QueryPageComponent {
             urlmethod="getOrderByEmail"
             method="get"
           >
-            <div className="form-group row align-middle">
-              <div className="col-4 border border-light align-middle">
+            <div className="form-group row align-middle d-flex">
+              <div className="col-4 border border-light align-middle align-self-center">
                 <p className="text-center align-middle">
                   Find order by email except returned orders
                 </p>
               </div>
               <input
                 type="email"
-                className="form-control col-6"
+                className="form-control col-6 align-self-center"
                 placeholder="Enter Email"
                 value={this.state.email}
                 onChange={this.handleInputChange}

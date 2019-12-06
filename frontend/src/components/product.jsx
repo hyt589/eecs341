@@ -21,7 +21,7 @@ class ProductPage extends React.Component {
             queryResult: table
           })
         } else {
-          this.setState({ queryResult: <ErrorMessage /> })
+          this.setState({ queryResult: <ErrorMessage msg={result.msg} /> })
         }
       }
     }

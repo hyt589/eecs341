@@ -56,7 +56,7 @@ class Select extends React.Component {
   }
 
   render = () => (
-    <div className="form-group col-4">
+    <div className={this.props.className}>
       <label htmlFor={this.dataKey}>{this.name}</label>
       {this.state.selector}
     </div>

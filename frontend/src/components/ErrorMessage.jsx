@@ -21,7 +21,8 @@ class ErrorMessage extends React.Component {
         className="alert alert-danger alert-dismissible fade show"
         role="alert"
       >
-        <strong>Error:</strong> an error happened
+        <strong>Error:</strong> an error happened. <br/>
+        {this.props.msg}
         <button
           type="button"
           className="close"

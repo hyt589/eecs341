@@ -17,7 +17,7 @@ class SupplierPage extends QueryPageComponent {
         })
       } else {
         this.setState({
-          queryResult: <ErrorMessage />
+          queryResult: <ErrorMessage msg={result.msg} />
         })
       }
     }
@@ -69,18 +69,20 @@ class SupplierPage extends QueryPageComponent {
             </button>
           </div>
         </form>
+        <div className="container">
         <QueryForm
           endpoint="/listAllNames"
           urlmethod="listAllNames"
           onSubmit={this.handleGetSubmit}
           method="get"
           content={
-            <div>
+            <div className='col-2'>
               
               <div className="align-middle"> <p>Get supplier name list</p> </div>
             </div>
           }
         />
+        </div>
         <div className="row">
           <div className="col-3"></div>
           <div className="col-6 border">{this.state.queryResult}</div>
