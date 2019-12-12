@@ -16,7 +16,7 @@ class OrderPage extends QueryPageComponent {
   constructor(props) {
     super(props)
     this.newOrderBody = {
-      email: this.state.inputValues.email,
+      email: this.state.inputValues.insertEmail,
       productId: this.state.inputValues.productId,
       qty: this.state.inputValues.orderQty
     }
@@ -24,7 +24,7 @@ class OrderPage extends QueryPageComponent {
     this.state.queryResult = null
     this.insertOrderSubmit=(event)=>{
       if (
-        this.state.inputValues.email !== undefined &&
+        this.state.inputValues.inertEmail !== undefined &&
         this.state.inputValues.productId !== undefined &&
         this.state.inputValues.orderQty !== undefined &&
         this.state.inputValues.orderQty !== null
@@ -62,7 +62,7 @@ class OrderPage extends QueryPageComponent {
   }
   componentDidUpdate() {
     this.newOrderBody = {
-      email: this.state.inputValues.email,
+      email: this.state.inputValues.inertEmail,
       productId: this.state.inputValues.productId,
       qty: this.state.inputValues.orderQty
     }
@@ -81,7 +81,7 @@ class OrderPage extends QueryPageComponent {
 
             const { inputValues } = { ...this.state }
             const currentState = inputValues
-            currentState.email = value
+            currentState.inertEmail = value
             this.setState({
               inputValues: currentState
             })
@@ -91,7 +91,7 @@ class OrderPage extends QueryPageComponent {
           name="Select Email"
           objKeys={["email"]}
           onChange={this.handleInputChange}
-          dataKey="email"
+          dataKey="inertEmail"
         />
         <Select
         className="col-3"
