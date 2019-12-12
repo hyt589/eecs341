@@ -6,6 +6,7 @@ import ProductPage from "./product"
 import SupplierPage from "./supplier"
 import FacilityPage from "./facility"
 import ItemPage from "./item"
+import CustomerPage from "./customer"
 
 class Page extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Page extends React.Component {
     this.displayOrderPage = this.displayOrderPage.bind(this)
     this.displayFacilityPage = this.displayFacilityPage.bind(this)
     this.displayItemPage = this.displayItemPage.bind(this)
+    this.displayCustomerPage = this.displayCustomerPage.bind(this)
   }
 
   render() {
@@ -62,6 +64,13 @@ class Page extends React.Component {
             >
               Facility
             </Nav.Link>
+            <Nav.Link
+              className="nav-item"
+              href="#Customer"
+              onClick={this.displayCustomerPage}
+            >
+              Customer
+            </Nav.Link>
           </Nav>
         </Navbar>
         {this.state.display}
@@ -91,6 +100,10 @@ class Page extends React.Component {
 
   displayItemPage() {
     this.setState({ display: <ItemPage /> })
+  }
+
+  displayCustomerPage() {
+    this.setState({ display: <CustomerPage /> })
   }
 }
 

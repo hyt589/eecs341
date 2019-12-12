@@ -42,46 +42,49 @@ class SupplierPage extends QueryPageComponent {
             <p className="lead">You can query supplier information here.</p>
           </div>
         </div>
-        <form
-          className="border container"
-          endpoint="/address-byName"
-          urlmethod="getAddressByName"
-          onSubmit={this.handleGetSubmit}
-          method="get"
-        >
-          <div className="form-group row">
-            <div className="col-2">Get supplier address by name</div>
-            <label htmlFor="supplierName" className="col-1">
-              Supplier address
-            </label>
-            <input
-              type="text"
-              className="form-control col-6 h-100"
-              id="supplierName"
-              placeholder="Enter name"
-              value={this.state.inputValues.supplierName}
-              onChange={this.handleInputChange}
-              paramkey="name"
-              paramobjkey="getAddressByName"
-            />
-            <button className="col-2 btn btn-primary h-100" type="submit">
-              Get
-            </button>
-          </div>
-        </form>
+
         <div className="container">
-        <QueryForm
-          endpoint="/listAllNames"
-          urlmethod="listAllNames"
-          onSubmit={this.handleGetSubmit}
-          method="get"
-          content={
-            <div className='col-2'>
-              
-              <div className="align-middle"> <p>Get supplier name list</p> </div>
+          <form
+            className="border"
+            endpoint="/address-byName"
+            urlmethod="getAddressByName"
+            onSubmit={this.handleGetSubmit}
+            method="get"
+          >
+            <div className="form-group row">
+              <div className="col-2">Get supplier address by name</div>
+              <label htmlFor="supplierName" className="col-1">
+                Supplier address
+              </label>
+              <input
+                type="text"
+                className="form-control col-6 h-100"
+                id="supplierName"
+                placeholder="Enter name"
+                value={this.state.inputValues.supplierName}
+                onChange={this.handleInputChange}
+                paramkey="name"
+                paramobjkey="getAddressByName"
+              />
+              <button className="col-2 btn btn-primary h-100" type="submit">
+                Get
+              </button>
             </div>
-          }
-        />
+          </form>
+          <QueryForm
+            endpoint="/listAllNames"
+            urlmethod="listAllNames"
+            onSubmit={this.handleGetSubmit}
+            method="get"
+            content={
+              <div className="col-2">
+                <div className="align-middle">
+                  {" "}
+                  <p>Get supplier name list</p>{" "}
+                </div>
+              </div>
+            }
+          />
         </div>
         <div className="row">
           <div className="col-3"></div>
