@@ -74,7 +74,4 @@ public interface CustomerAccountMapper {
             @Param("customerID") int customerID,
             @Param("orderID") int orderID
     );
-
-
-
 }
