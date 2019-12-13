@@ -38,16 +38,16 @@ public class CustomerAccountController {
         String billing_state = (String) customer_account.get("billing_state");
         String billing_zip = (String) customer_account.get("billing_zip");
         if (Objects.isNull(username) && Objects.isNull(shipping_address) && Objects.isNull(shipping_city)
-        && Objects.isNull(shipping_state) && Objects.isNull(shipping_zip) && Objects.isNull(billing_address)
-        && Objects.isNull(billing_city) && Objects.isNull(billing_state) && Objects.isNull(billing_zip)) {
+                && Objects.isNull(shipping_state) && Objects.isNull(shipping_zip) && Objects.isNull(billing_address)
+                && Objects.isNull(billing_city) && Objects.isNull(billing_state) && Objects.isNull(billing_zip)) {
             return R.error("Not enough information to post record");
         }
         try {
-            customerAccountService.insertCustomerAccount(username, email_address, shipping_address, 
-            shipping_city, shipping_state, shipping_zip, billing_address, billing_city,
-            billing_state, billing_zip);
+            customerAccountService.insertCustomerAccount(username, email_address, shipping_address,
+                    shipping_city, shipping_state, shipping_zip, billing_address, billing_city,
+                    billing_state, billing_zip);
             return R.msg("Insert success");
-        } catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
             return R.error("An error occurred while inserting into database");
         }
