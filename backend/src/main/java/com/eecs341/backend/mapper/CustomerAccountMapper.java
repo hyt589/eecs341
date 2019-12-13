@@ -55,7 +55,7 @@ public interface CustomerAccountMapper {
             "values (#{username}, #{email_address}, #{shipping_address}, #{shipping_city}, #{shipping_state}, + \n" +
             "#{shipping_zip}, #{billing_address}, #{billing_city}, #{billing_state}, #{billing_zip}) \n" +
             "returning id")
-    void insertCustomerAccount(
+    int insertCustomerAccount(
             @Param("username") String username,
             @Param("email_address") String email_address,
             @Param("shipping_address") String shipping_address,
