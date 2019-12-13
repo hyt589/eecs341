@@ -20,4 +20,12 @@ public class ProductSupplierService {
     public List<Map> getAllNames() {
         return mapper.getAllSupplierNames();
     }
+
+    public List<Map> getAllNamesExceptSelectName(String name){
+        return mapper.getNameOfAllSuppliersExceptSelectSupplier(name);
+    }
+
+    public List<Map> getAllNamesNotSupplyingSelectCategory(String category){
+        return mapper.getNameOfAllSuppliersThatDontSupplySelectCategory(category);
+    }
 }
