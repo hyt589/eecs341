@@ -52,7 +52,8 @@ public interface CustomerAccountMapper {
     @Insert("insert into eecs341.customer_account (username, email_address, shipping_address, + \n" +
             "shipping_city, shipping_state, shipping_zip, billing_address, billing_city, + \n" +
             "billing_state, billing_zip )\n" +
-            "values (#{username}, #{email_address}, 'null', 'null', 'null')")
+            "values (#{username}, #{email_address}, 'null', 'null', 'null'}, + \n" +
+            "'null', 'null', 'null', 'null', 'null')")
     int insertCustomerAccount(
             @Param("username") String username,
             @Param("email_address") String email_address
