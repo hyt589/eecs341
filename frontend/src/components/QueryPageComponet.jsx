@@ -19,7 +19,7 @@ class QueryPageComponent extends React.Component {
     const { inputValues } = { ...this.state }
     const currentState = inputValues
     inputValues[target.getAttribute("paramkey")] = target.value
-    console.log(this.state)
+    // console.log(this.state)
     this.setState({ inputValues: currentState })
     if (this.paramObjs[target.getAttribute("paramobjkey")] !== undefined) {
       this.paramObjs[target.getAttribute("paramobjkey")][
@@ -34,8 +34,7 @@ class QueryPageComponent extends React.Component {
     let fn = this.functions[form.getAttribute("urlmethod")]
     const params = this.paramObjs[form.getAttribute("urlmethod")]
     const url = createURL(this.prefix, endpoint, params)
-    console.log(typeof form);
-    
+    console.log(form.getAttribute("jsonbody"))
     enhancedFetch(
       url,
       {

@@ -60,7 +60,7 @@ class OrderPage extends QueryPageComponent {
 
     this.prefix = "/order"
   }
-  componentDidUpdate() {
+  componentWillUpdate() {
     this.newOrderBody = {
       email: this.state.inputValues.inertEmail,
       productId: this.state.inputValues.productId,
@@ -183,11 +183,7 @@ class OrderPage extends QueryPageComponent {
             <div className="col-6">{this.state.queryResult}</div>
           </div>
 
-          <div className="row">
-            <ul>
-              <li>Filter order by status and product category</li>
-            </ul>
-          </div>
+          
         </div>
       </div>
     )

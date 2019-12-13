@@ -27,7 +27,7 @@ class ItemPage extends QueryPageComponent {
           })
         } else {
           this.setState({
-            queryResult: <ErrorMessage msg={result.msg} />
+            filteredItems: <ErrorMessage msg={result.msg} />
           })
         }
       }

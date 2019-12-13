@@ -9,7 +9,7 @@ class QueryForm extends React.Component {
         urlmethod={this.props.urlmethod}
         onSubmit={this.props.onSubmit}
         method={this.props.method}
-        jsonBody={this.props.jsonBody}
+        jsonbody={this.props.jsonbody}
       >
         
         <div className="col-12">

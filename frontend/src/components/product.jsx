@@ -98,14 +98,7 @@ class ProductPage extends React.Component {
             <div className="col-3"></div>
             <div className="col-6 border">{this.state.queryResult}</div>
           </div>
-          <div className="row">
-            <ul>
-              <li>Add a new Product</li>
-              <li>Logical delete (see Supplier page)</li>
-              <li>Use except query to get all products that are not deleted</li>
-              <li>Get all products whose supplier is not deleted</li>
-            </ul>
-          </div>
+          
         </div>
       </div>
     )
