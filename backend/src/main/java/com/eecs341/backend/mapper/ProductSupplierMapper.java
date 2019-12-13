@@ -1,5 +1,6 @@
 package com.eecs341.backend.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -45,5 +46,13 @@ public interface ProductSupplierMapper {
             "                   and p2.id = sb2.product_id\n" +
             "                   and p2.category = = #{category}")
     List<Map> getNameOfAllSuppliersThatDontSupplySelectCategory(@Param ("category") String category);
+
+    @Select("insert into eecs341.product_supplier(name)\n" +
+            "values (#{name})\n" +
+            "returning id")
+    int insertProductSupplier(
+            @Param("name") String name
+    );
+
 
 }
