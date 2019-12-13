@@ -24,7 +24,7 @@ public interface CustomerAccountMapper {
     @Select("select distinct email_address as email from eecs341.customer_account where deleted=false")
     List<Map> getMailingList();
 
-    @Insert("insert into eecs341.customer_account (username, email_address, shipping_address, + \n" +
+    @Select("insert into eecs341.customer_account (username, email_address, shipping_address, + \n" +
             "shipping_city, shipping_state, shipping_zip, billing_address, billing_city, + \n" +
             "billing_state, billing_zip )\n" +
             "values (#{username}, #{email_address}, #{shipping_address}, #{shipping_city}, #{shipping_state}, + \n" +
