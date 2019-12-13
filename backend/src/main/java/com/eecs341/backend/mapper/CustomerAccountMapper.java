@@ -49,23 +49,13 @@ public interface CustomerAccountMapper {
 
     
 
-    @Select("insert into eecs341.customer_account (username, email_address, shipping_address, + \n" +
+    @Insert("insert into eecs341.customer_account (username, email_address, shipping_address, + \n" +
             "shipping_city, shipping_state, shipping_zip, billing_address, billing_city, + \n" +
             "billing_state, billing_zip )\n" +
-            "values (#{username}, #{email_address}, #{shipping_address}, #{shipping_city}, #{shipping_state}, + \n" +
-            "#{shipping_zip}, #{billing_address}, #{billing_city}, #{billing_state}, #{billing_zip}) \n" +
-            "returning id")
+            "values (#{username}, #{email_address}, 'null', 'null', 'null')")
     int insertCustomerAccount(
             @Param("username") String username,
-            @Param("email_address") String email_address,
-            @Param("shipping_address") String shipping_address,
-            @Param("shipping_city") String shipping_city,
-            @Param("shipping_state") String shipping_state,
-            @Param("shipping_zip") String shipping_zip,
-            @Param("billing_address") String billing_address,
-            @Param("billing_city") String billing_city,
-            @Param("billing_state") String billing_state,
-            @Param("billing_zip") String billing_zip
+            @Param("email_address") String email_address
     );
 
     @Insert("insert into eecs341.cust_ord (customer_id, order_id)\n" +
@@ -74,7 +64,4 @@ public interface CustomerAccountMapper {
             @Param("customerID") int customerID,
             @Param("orderID") int orderID
     );
-
-
-
 }
