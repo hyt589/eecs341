@@ -24,6 +24,12 @@ public class CustomerAccountController {
         List data = customerAccountService.getMailingList();
         return data.size() > 0 ? R.data(data) : R.error("Empty Result");
     }
+    
+    @GetMapping("/ShippingAddressOfCustomersExceptDelivered")
+    public R getShippingAddressOfCustomersExceptDelivered() {
+        List data = customerAccountService.getMailingList();
+        return data.size() > 0 ? R.data(data) : R.error("Empty Result");
+    }
 
     @PostMapping("/newCustomerAccount")
     public R insertOrder(@RequestBody Map<String, Object> customer_account) {
