@@ -45,6 +45,7 @@ public interface ItemMapper {
             "  and sb.supplier_id = ps.id\n" +
             "  and fi.facility_id = f.id\n" +
             "  and p.id = pi.product_id\n" +
+            "  and ss.transit = false" +
             "  ${conditionalSqlStatement}")
     List<Map> filterItemByVariousCondition(@Param("conditionalSqlStatement") String sql);
 }
