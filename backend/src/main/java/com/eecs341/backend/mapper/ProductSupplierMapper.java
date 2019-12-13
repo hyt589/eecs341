@@ -21,7 +21,7 @@ public interface ProductSupplierMapper {
     List<Map> getAddressOfSupplierByName(@Param("name") String name);
 
     @Select("select distinct name\n" +
-            "from eecs341.product_supplier" +
+            "from eecs341.product_supplier " +
             "where deleted = false")
     List<Map> getAllSupplierNames();
 

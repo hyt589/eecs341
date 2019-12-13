@@ -15,7 +15,7 @@ public interface CustomerAccountMapper {
 
     @Select("select id from eecs341.customer_account\n" +
             "where email_address=#{email}\n" +
-            "and deleted=false" +
+            "and deleted=false " +
             "limit 1")
     int getIdByEmail(
             @Param("email") String email
