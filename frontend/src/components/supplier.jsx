@@ -90,6 +90,18 @@ class SupplierPage extends QueryPageComponent {
           <div className="col-3"></div>
           <div className="col-6 border">{this.state.queryResult}</div>
         </div>
+        <div className="row">
+          <ul>
+            <li>Add a new supplier</li>
+            <li>Update address of a supplier by id</li>
+            <li>
+              Logical delete (Since other tables reference this table it's
+              probably a bad idea to physically remove the record; maybe add a
+              new boolean or int column that indicates if this record has been
+              deleted; this should probably be done to all other tables)
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }

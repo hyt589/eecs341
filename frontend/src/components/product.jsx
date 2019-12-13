@@ -67,39 +67,45 @@ class ProductPage extends React.Component {
           </div>
         </div>
         <div className="container">
-        <form
-          className="border"
-          onSubmit={this.handleSubmit}
-          endpoint="/qtyInStock-byCategory"
-          urlmethod="getQtyByCategory"
-          method='get'
-        >
-          <div className="form-group row">
-            <div className="col-2">Get qty in stock by product category</div>
-            <label htmlFor="getQtyByCat-category" className="col-1">
-              Product Category
-            </label>
-            <input
-              type="text"
-              className="form-control col-6 h-100"
-              id="getQtyByCat-category"
-              placeholder="Enter category"
-              value={this.state.inputValues.category}
-              onChange={this.handleInputChange}
-              paramkey="category"
-              paramobjkey="getQtyByCategory"
-            ></input>
-            <button type="submit" className="col-2 btn btn-primary h-100">
-              Submit
-            </button>
+          <form
+            className="border"
+            onSubmit={this.handleSubmit}
+            endpoint="/qtyInStock-byCategory"
+            urlmethod="getQtyByCategory"
+            method="get"
+          >
+            <div className="form-group row">
+              <div className="col-2">Get qty in stock by product category</div>
+              <label htmlFor="getQtyByCat-category" className="col-1">
+                Product Category
+              </label>
+              <input
+                type="text"
+                className="form-control col-6 h-100"
+                id="getQtyByCat-category"
+                placeholder="Enter category"
+                value={this.state.inputValues.category}
+                onChange={this.handleInputChange}
+                paramkey="category"
+                paramobjkey="getQtyByCategory"
+              ></input>
+              <button type="submit" className="col-2 btn btn-primary h-100">
+                Submit
+              </button>
+            </div>
+          </form>
+          <div className="row">
+            <div className="col-3"></div>
+            <div className="col-6 border">{this.state.queryResult}</div>
           </div>
-        </form>
-        <div className="row">
-          <div className="col-3"></div>
-          <div className="col-6 border">{this.state.queryResult}</div>
+          <div className="row">
+            <ul>
+              <li>Add a new Product</li>
+              <li>Logical delete (see Supplier page)</li>
+              <li>Use except query to get all products that are not deleted</li>
+            </ul>
+          </div>
         </div>
-        </div>
-        
       </div>
     )
   }
