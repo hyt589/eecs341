@@ -171,7 +171,7 @@ class OrderPage extends QueryPageComponent {
               className="col-4"
               content={insertFormContent}
               method="post"
-              jsonBody={JSON.stringify(this.newOrderBody)}
+              jsonbody={JSON.stringify(this.newOrderBody)}
               onSubmit={this.insertOrderSubmit}
               urlmethod="placeOrder"
               endpoint="/newOrder"

@@ -44,7 +44,7 @@ class QueryPageComponent extends React.Component {
           "Content-Type": "application/json"
         },
         method: form.getAttribute("method"),
-        body: form.getAttribute("jsonBody")
+        body: form.getAttribute("jsonbody")
       },
       fn
     )
