@@ -1,9 +1,8 @@
 package com.eecs341.backend.service;
 
-import com.eecs341.backend.mapper.CustomerAccountMapper;
 import com.eecs341.backend.mapper.ItemMapper;
 import com.eecs341.backend.mapper.OrderMapper;
-import com.eecs341.backend.mapper.ShippingStatusServiceMapper;
+import com.eecs341.backend.mapper.ShippingStatusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,38 +12,43 @@ import java.util.Map;
 @Service
 public class ShippingStatusService {
     @Autowired
-    ShippingStatusServiceMapper shippingStatusServiceMapper;
+    ShippingStatusMapper shippingStatusMapper;
 
-    @Autowired
-    FacilityMapper facilityMapper;
-
-    @Autowired
-    OrderMapper orderMapper;
-
-    @Autowired
-    ItemMapper itemMapper;
-
-    public List<Map> getDelivAddressInOhioExceptCancelled(String delivery_address) {
-        return shippingStatusServiceMapper.getDelivAddressInOhioExceptCancelled(delivery_address);
+    public List<Map> getDelivAddressInOhioExceptCancelled(String deliveryAddress) {
+        return shippingStatusMapper.getDelivAddressInOhioExceptCancelled(deliveryAddress);
     }
 
     public List<Map> getShipStatIDsExceptDneInOH(int id) {
-        return shippingStatusServiceMapper.getShipStatIDsExceptDneInOH(id);
+        return shippingStatusMapper.getShipStatIDsExceptDneInOH(id);
     }
 
-    public void insertShippingStatus(
-            String sender_address,
-            String delivery_address,
-            String sender_city,
-            String delivery_city,
-            String sender_state,
-            String delivery_state,
-            int sender_zip,
-            int delivery_zip
-    ){
-         int shippingSatusID = shippingStatusServiceMapper.();
-        int facilityID = facilityMapper.();
-        int orderId = orderMapper.insertOrder();
-        int itemID = itemMapper.insertItem();
+    public boolean insertShippingStatus(
+            String senderAddress,
+            String deliveryAddress,
+            String senderCity,
+            String deliveryCity,
+            String senderState,
+            String deliveryState,
+            int senderZip,
+            int deliveryZip,
+            int orderId
+    ) {
+        List<Integer> facilityIdList =  shippingStatusMapper.getFacilityIdByOrderID(orderId);
+        if (facilityIdList.size() == 0){
+            return false;
+        }
+        int shippingStatusId = shippingStatusMapper.insertShippingStatus(
+                senderAddress,
+                deliveryAddress,
+                senderCity,
+                deliveryCity,
+                senderState,
+                deliveryState,
+                senderZip,
+                deliveryZip
+        );
+        shippingStatusMapper.insertShipOrd(orderId, shippingStatusId);
+        shippingStatusMapper.insertShipFac(facilityIdList.get(0), shippingStatusId);
+        return true;
     }
 }
