@@ -59,15 +59,16 @@ class ProductPage extends React.Component {
 
   render() {
     return (
-      <div id="container">
+      <div>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
             <h1 className="display-4">Product</h1>
             <p className="lead">You can query product information here.</p>
           </div>
         </div>
+        <div className="container">
         <form
-          className="border container"
+          className="border"
           onSubmit={this.handleSubmit}
           endpoint="/qtyInStock-byCategory"
           urlmethod="getQtyByCategory"
@@ -97,6 +98,8 @@ class ProductPage extends React.Component {
           <div className="col-3"></div>
           <div className="col-6 border">{this.state.queryResult}</div>
         </div>
+        </div>
+        
       </div>
     )
   }

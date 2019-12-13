@@ -182,6 +182,12 @@ class OrderPage extends QueryPageComponent {
             <div className="col-3"></div>
             <div className="col-6">{this.state.queryResult}</div>
           </div>
+
+          <div className="row">
+            <ul>
+              <li>Filter order by status and product category</li>
+            </ul>
+          </div>
         </div>
       </div>
     )
