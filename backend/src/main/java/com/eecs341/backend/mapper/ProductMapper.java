@@ -18,7 +18,8 @@ public interface ProductMapper {
             "     eecs341.sup_by sb\n" +
             "where p.id = sb.product_id\n" +
             "    and sb.supplier_id = s.id\n" +
-            "    and category = #{category}")
+            "    and category = #{category}" +
+            "    and p.deleted=false")
     List<Map> getQtyInStockByCategory(@Param("category") String category);
 
     @Select("select p.name, p.qty_in_stock\n" +
@@ -28,10 +29,11 @@ public interface ProductMapper {
             "where p.id = sb.product_id\n" +
             "    and sb.supplier_id = s.id\n" +
             "    and s.name = #{supplier}\n" +
-            "    and p.qty_in_stock < #{qty}")
+            "    and p.qty_in_stock < #{qty}" +
+            "    and p.deleted=false")
     List<Map> getNamesOfProductBySupplierNameAndQtyInStock(@Param("supplier") String supplier, @Param("qty") int qty);
 
     @Select("select p.id, p.name, ps.name as supplier from eecs341.product p, eecs341.sup_by sb, eecs341.product_supplier ps\n" +
-            "where p.id=sb.product_id and sb.supplier_id=ps.id")
+            "where p.id=sb.product_id and sb.supplier_id=ps.id and p.deleted=false")
     List<Map> getIdNameSupplierList();
 }

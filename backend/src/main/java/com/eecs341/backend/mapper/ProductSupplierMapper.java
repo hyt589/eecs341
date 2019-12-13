@@ -15,11 +15,13 @@ public interface ProductSupplierMapper {
     @Select("select address, city, state, zip_code\n" +
             "from eecs341.product_supplier\n" +
             "where name = #{name}\n" +
+            "and deleted = false " +
             "limit 1;")
     List<Map> getAddressOfSupplierByName(@Param("name") String name);
 
     @Select("select distinct name\n" +
-            "from eecs341.product_supplier;")
+            "from eecs341.product_supplier" +
+            "where deleted = false")
     List<Map> getAllSupplierNames();
 
 }

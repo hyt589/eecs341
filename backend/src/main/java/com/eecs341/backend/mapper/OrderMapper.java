@@ -10,27 +10,31 @@ import java.util.Map;
 @Component
 public interface OrderMapper {
 
-    @Select("select o.id, o.qty, p.name, p.category from eecs341.orders o,\n" +
-            "              eecs341.cust_ord co,\n" +
-            "              eecs341.prod_ord po,\n" +
-            "              eecs341.customer_account c,\n" +
-            "              eecs341.product p\n" +
-            "where o.id=co.order_id\n" +
-            "and co.customer_id=c.id\n" +
-            "and o.id=po.order_id\n" +
-            "and po.product_id=p.id\n" +
-            "and c.email_address=#{email}\n" +
-            "except (select o.id, o.qty, p.name, p.category from eecs341.orders o,\n" +
-            "                                                    eecs341.cust_ord co,\n" +
-            "                                                    eecs341.prod_ord po,\n" +
-            "                                                    eecs341.customer_account c,\n" +
-            "                                                    eecs341.product p\n" +
-            "        where o.id=co.order_id\n" +
-            "          and co.customer_id=c.id\n" +
-            "          and o.id=po.order_id\n" +
-            "          and po.product_id=p.id\n" +
-            "          and c.email_address=#{email}\n" +
-            "          and o.status ='returned')")
+    @Select("select o.id, o.qty, p.name, p.category\n" +
+            "from eecs341.orders o,\n" +
+            "     eecs341.cust_ord co,\n" +
+            "     eecs341.prod_ord po,\n" +
+            "     eecs341.customer_account c,\n" +
+            "     eecs341.product p\n" +
+            "where o.id = co.order_id\n" +
+            "  and co.customer_id = c.id\n" +
+            "  and o.id = po.order_id\n" +
+            "  and po.product_id = p.id\n" +
+            "  and p.deleted = false\n" +
+            "  and c.email_address = #{email}\n" +
+            "    except (select o.id, o.qty, p.name, p.category\n" +
+            "            from eecs341.orders o,\n" +
+            "                 eecs341.cust_ord co,\n" +
+            "                 eecs341.prod_ord po,\n" +
+            "                 eecs341.customer_account c,\n" +
+            "                 eecs341.product p\n" +
+            "            where o.id = co.order_id\n" +
+            "              and co.customer_id = c.id\n" +
+            "              and o.id = po.order_id\n" +
+            "              and po.product_id = p.id\n" +
+            "              and p.deleted = false\n" +
+            "              and c.email_address = #{email}\n" +
+            "              and o.status = 'returned')")
     List<Map> getOrderIdByEmailAddressExceptReturned(@Param("email") String email);
 
 

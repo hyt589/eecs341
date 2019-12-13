@@ -22,7 +22,8 @@ public interface ItemMapper {
             "     eecs341.item as i\n" +
             "where f.id = iff.facility_id\n" +
             "  and i.id = iff.item_id\n" +
-            "  and i.status = #{status}")
+            "  and i.status = #{status}" +
+            "  and i.deleted=false")
     List<Map> selectAllFacilitiesContainingItemOfStatus(@Param("status") String status);
 
 }
