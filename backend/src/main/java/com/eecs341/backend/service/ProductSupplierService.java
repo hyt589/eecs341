@@ -29,15 +29,5 @@ public class ProductSupplierService {
         return mapper.getNameOfAllSuppliersThatDontSupplySelectCategory(category);
     }
 
-    public boolean insertProductSupplier(
-            String name
-    ){
-        List<Integer> productIdList = mapper.getProdIdBySuppID(prodID);
-        if (productIdList.size() == 0{
-            return false;
-        }
-        int productSupplierId = mapper.insertProductSupplier(name);
-        mapper.insertSupBy(productIdList.get(0), productSupplierId);
-        return true;
-    }
+
 }

@@ -49,11 +49,11 @@ public interface CustomerAccountMapper {
 
     
 
-    @Select("insert into eecs341.customer_account (username, email_address, shipping_address, + \n" +
-            "shipping_city, shipping_state, shipping_zip, billing_address, billing_city, + \n" +
+    @Select("insert into eecs341.customer_account (username, email_address, shipping_address, \n" +
+            "shipping_city, shipping_state, shipping_zip, billing_address, billing_city, \n" +
             "billing_state, billing_zip )\n" +
-            "values (#{username}, #{email_address}, #{shipping_address}, #{shipping_city}, #{shipping_state}, + \n" +
-            "#{shipping_zip}, #{billing_address}, #{billing_city}, #{billing_state}, #{billing_zip}) \n" +
+            "values (#{username}, #{email_address}, #{shipping_address}, #{shipping_city}, #{shipping_state}, \n" +
+            "${shipping_zip}, #{billing_address}, #{billing_city}, #{billing_state}, ${billing_zip}) \n" +
             "returning id")
     int insertCustomerAccount(
             @Param("username") String username,
