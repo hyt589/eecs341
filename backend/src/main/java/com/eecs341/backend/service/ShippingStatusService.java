@@ -19,7 +19,7 @@ public class ShippingStatusService {
     }
 
     public List<Map> getShipStatIDsExceptDneInOH(int id) {
-        return shippingStatusMapper.getShipStatIDsExceptDneInOH(id);
+        return shippingStatusMapper.getShipStatIDsExceptOneInOH(id);
     }
 
     public boolean insertShippingStatus(

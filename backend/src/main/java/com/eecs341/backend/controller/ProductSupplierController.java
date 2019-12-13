@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/productSupplier")
@@ -37,5 +38,20 @@ public class ProductSupplierController {
     public R getAllNamesNotSupplyingSelectCategory(@RequestParam String category) {
         List<Map> data = service.getAllNamesNotSupplyingSelectCategory(category);
         return data.size() > 0 ? R.data(data) : R.error("Empty Result");
+    }
+
+    @GetMapping("/insertProductSupplier")
+    public R insertProductSupplier(@RequestParam Map<String, Object> productSupplier){
+        String name = (String) productSupplier.get("name");
+        if (Objects.isNull(name)){
+            return R.error("Not enough information to post record");
+        }
+        try {
+            service.insertProductSupplier(name);
+            return R.msg("Insert success");
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+            return R.error("An error occurred while inserting into database");
+        }
     }
 }

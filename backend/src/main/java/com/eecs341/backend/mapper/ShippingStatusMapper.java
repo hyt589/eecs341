@@ -13,22 +13,23 @@ import java.util.Map;
 public interface ShippingStatusMapper {
     @Select("select delivery_address\n" +
             "from eecs341.shipping_status\n" +
-            "where from_facility_id in (\n" +
+            "where to_facility_id in (\n" +
             "    select id\n" +
             "    from eecs341.facility\n" +
-            "    where state = 'OH')\n" +
-            "  and to_facility_id in (\n" +
-            "    select id\n" +
-            "    from eecs341.facility\n" +
-            "    where state = 'OH')")
-    List<Map> getDelivAddressInOhioExceptCancelled(@Param("delivery_address") String deliveryAddress);
+            "    where state = 'OH')" +
+            "except (select shipping_id" +
+            "         from eecs341.ship_ord" +
+            "           where order_id in(select id" +
+            "                               from eecs341.orders" +
+            "                                where status = #{status}")
+    List<Map> getDelivAddressInOhioExceptSelectSatus(@Param("status") String status);
 
     @Select("select ss1.id\n" +
             "from eecs341.shipping_status as ss1\n" +
-            "where not exists(select *\n" +
-            "                 from eecs341.shipping_status\n" +
-            "                 where ss1.sender_state = 'OH')")
-    List<Map>getShipStatIDsExceptDneInOH(@Param("id") int id);
+            "except (select ss2.id\n" +
+            "                 from eecs341.shipping_status as ss2\n" +
+            "                 where ss2.sender_state = #{state})")
+    List<Map>getShipStatIDsExceptSelectState(@Param(statet) int state);
 
     @Select("insert into eecs341.shipping_status(sender_address, delivery_address, sender_city,sender_state,sender_zip,delivery_city,delivery_state,delivery_zip)\n" +
             "values (#{sender_address}, #{delivery_address}, #{sender_city}, #{sender_state},#{sender_zip},#{delivery_city},#{delivery_state},#{delivery_zip})\n" +
