@@ -4,6 +4,9 @@ import com.eecs341.backend.mapper.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +31,13 @@ public class ItemService {
         String supplierList = constructSqlList(suppliers, "and ps.name in");
         String statusList = constructSqlList(itemStatus, "and i.status in");
         sql += stateList + categoryList + supplierList + statusList;
-        return mapper.filterItemByVariousCondition(sql);
+        List<Map> result = mapper.filterItemByVariousCondition(sql);
+        result.forEach(map -> {
+            Date badDate =(Date) map.get("restock_date");
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy");
+            map.put("restock_date", df.format(badDate));
+        });
+        return result;
     }
 
     private String constructSqlList(List<String> list, String prefix){

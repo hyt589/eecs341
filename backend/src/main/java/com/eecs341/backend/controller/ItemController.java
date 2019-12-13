@@ -21,7 +21,7 @@ public class ItemController {
         return data.size() > 0 ? R.data(data) : R.error("Empty result");
     }
 
-    @GetMapping("/byVariousConditions")
+    @PostMapping("/byVariousConditions")
     public R filterItemsByConditions(@RequestBody Map<String, List<String>> conditions){
         List<Map> data = service.filterItemsByVariousCondition(conditions);
         return data.size() > 0 ? R.data(data) : R.error("Empty result");
