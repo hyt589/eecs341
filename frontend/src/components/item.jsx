@@ -67,8 +67,7 @@ class ItemPage extends QueryPageComponent {
         .split(",")
         .filter(s => s !== "")
     }
-    console.log(this.filterItemBody);
-    
+    console.log(this.filterItemBody)
   }
 
   render = () => {
@@ -171,7 +170,7 @@ class ItemPage extends QueryPageComponent {
                 >
                   <FormControl
                     className="form-control align-self-center"
-                    placeholder="state codes, seperate by commas"
+                    placeholder="Supplier names"
                     value={this.state.inputValues.suppliers}
                     onChange={this.handleInputChange}
                     paramkey="suppliers"
@@ -198,7 +197,7 @@ class ItemPage extends QueryPageComponent {
                 >
                   <FormControl
                     className="form-control align-self-center"
-                    placeholder="state codes, seperate by commas"
+                    placeholder="Item status"
                     value={this.state.inputValues.itemStatus}
                     onChange={this.handleInputChange}
                     paramkey="itemStatus"
@@ -216,10 +215,10 @@ class ItemPage extends QueryPageComponent {
                 </button>
               </div>
             </div>
-            <div className="row">
-              <div className="col-12">{this.state.filteredItems}</div>
-            </div>
           </form>
+          <div className="row">
+            <div className="col-12">{this.state.filteredItems}</div>
+          </div>
         </div>
       </div>
     )
