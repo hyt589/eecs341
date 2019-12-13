@@ -1,5 +1,6 @@
 package com.eecs341.backend.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -23,5 +24,35 @@ public interface ProductSupplierMapper {
             "from eecs341.product_supplier" +
             "where deleted = false")
     List<Map> getAllSupplierNames();
+
+    @Select("select distinct ps1.name\n" +
+            "from eecs341.product_supplier as ps1,\n" +
+            "     eecs341.product as p1\n" +
+            "where p1.name = 'black tea'\n" +
+            "    EXCEPT (select distinct ps2.name\n" +
+            "            from eecs341.product_supplier as ps2\n" +
+            "            where ps2.name = #{name}")
+    List<Map> getNameOfAllSuppliersExceptSelectSupplier(@Param ("name") String name);
+
+    @Select("select ps1.name\n" +
+            "from eecs341.product_supplier as ps1\n" +
+            "where not exists(select ps2.name\n" +
+            "                 from eecs341.product_supplier as ps2,\n" +
+            "                      eecs341.product as p2,\n" +
+            "                      eecs341.sup_by as sb2\n" +
+            "                 where ps2.id = sb2.supplier_id\n" +
+            "                   and p2.id = sb2.product_id\n" +
+            "                   and ps1.id = sb2.supplier_id\n" +
+            "                   and p2.id = sb2.product_id\n" +
+            "                   and p2.category = = #{category}")
+    List<Map> getNameOfAllSuppliersThatDontSupplySelectCategory(@Param ("category") String category);
+
+    @Select("insert into eecs341.product_supplier(name)\n" +
+            "values (#{name})\n" +
+            "returning id")
+    int insertProductSupplier(
+            @Param("name") String name
+    );
+
 
 }

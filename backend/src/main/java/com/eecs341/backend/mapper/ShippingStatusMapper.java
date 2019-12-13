@@ -44,7 +44,8 @@ public interface ShippingStatusMapper {
             @Param("delivery_zip") int deliveryZip
     );
 
-    @Insert("insert into eecs341.item_ship(item_id, shipment_id) values (#{itemID}, #{shipmentID})")
+    @Insert("insert into eecs341.item_ship(item_id, shipment_id)\n" +
+            "values (#{itemID}, #{shipmentID})")
     void insertItemShip(
         @Param("itemID") int itemID,
         @Param("shipmentID") int shipmentID
@@ -52,21 +53,22 @@ public interface ShippingStatusMapper {
     );
 
     @Insert("insert into eecs341.ship_ord(shipment_id,order_id)\n" +
-            "values (#{shipmentId}, #{orderID})")
+            "values (#{shipmentID}, #{orderID})")
     void insertShipOrd(
         @Param("orderID") int orderID,
         @Param("shipmentID") int shipmentID
     );
 
-    @Insert("insert into eecs341.ship_ord(shipping_id, order_id) VALUES (#{shipmentID}, #{facilityID})")
+    @Insert("insert into eecs341.ship_fac(shipping_id, facility_id)\n" +
+            "values (#{shipmentID}, #{facilityID})")
     void insertShipFac(
         @Param("facilityID") int facilityID,
         @Param("shipmentID") int shipmentID
 
     );
 
-    @Select("select fi.facility_id from eecs341.item_ord io, eecs341.item_fac fi\n" +
-            "where io.item_id=fi.item_id\n" +
+    @Select("select fi.facility_id from eecs341.prod_ord io, eecs341.prod_fac fi\n" +
+            "where io.product_id=fi.product_id\n" +
             "and order_id = #{orderId}")
     List<Integer> getFacilityIdByOrderID(@Param("orderId") int orderId);
 }

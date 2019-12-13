@@ -26,4 +26,16 @@ public class ProductSupplierController {
         List<Map> data = service.getAllNames();
         return data.size() > 0 ? R.data(data) : R.error("Empty Result");
     }
+
+    @GetMapping("/getAllNamesExceptSelectName")
+    public R getAllNamesExceptSelectName(@RequestParam String name) {
+        List<Map> data = service.getAllNamesExceptSelectName(name);
+        return data.size() > 0 ? R.data(data) : R.error("Empty Result");
+    }
+
+    @GetMapping("/getAllNamesNotSupplyingSelectCategory")
+    public R getAllNamesNotSupplyingSelectCategory(@RequestParam String category) {
+        List<Map> data = service.getAllNamesNotSupplyingSelectCategory(category);
+        return data.size() > 0 ? R.data(data) : R.error("Empty Result");
+    }
 }
