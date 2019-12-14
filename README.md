@@ -13,7 +13,6 @@ A course project for EECS341 (Intro to Database System) at CWRU
   - Bootstrap
   - node.js
     - React.js
-    - Redux for state management
     
 ## How to run this program locally
 
